@@ -4,6 +4,6 @@ TAs: Tara Chari, Meichen Fang, and Jerry Wang
 
 This folder contains the problem set and Colab notebooks for HW1. 
 
-The slides for the relevant lectures can be found here: [Lecture 1](https://docs.google.com/presentation/d/1-Bo7yaaaxbf8ul_2gacZIII_pggd6JmSVXEF4Zwqekg/edit?usp=sharing)
+The slides for the relevant lectures can be found here: [Lecture 1](https://docs.google.com/presentation/d/1-Bo7yaaaxbf8ul_2gacZIII_pggd6JmSVXEF4Zwqekg/edit?usp=sharing) and [Lecture 2](https://docs.google.com/presentation/d/1tpeNHSONBunT7TwZSlwm42VknPVNeufdY7A4rzqMhkI/edit?usp=share_link)
 
 
