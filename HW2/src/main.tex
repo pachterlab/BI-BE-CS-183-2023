@@ -1,0 +1,132 @@
+\documentclass[11pt]{exam}
+\usepackage{amsfonts,amsthm,amsmath,amssymb,mathrsfs,bbm,dsfont}
+\usepackage{hyperref}
+\usepackage{csquotes}\MakeOuterQuote{"}
+\qformat{\textbf{Problem \thequestion}\quad (\thepoints)\hfill}
+\newcommand{\ind}{\perp\!\!\!\!\perp} 
+\newtheorem{theorem}{Theorem}
+
+\begin{document}
+
+\begin{center}
+
+     \textbf{Bi/BE/CS 183 2022-2023\\ Instructor: Lior Pachter\\ TAs: Tara Chari, Meichen Fang, Zitong (Jerry) Wang \vskip 0.15in Problem Set 2}
+
+\end{center}
+Submit your solutions as a single PDF file via Canvas by {\bf 8am Tuesday January 24th}. 
+\begin{itemize}
+  \item If writing up problems by hand, please use a pen and not a pencil, as it is difficult to read scanned submission of pencil work. Typed solutions are preferred.
+  \item For problems that require coding, Colab notebooks will be provided. Please copy and save the shared notebook and edit your own copy, which you should then submit by including a clickable link in your submitted homework. Prior to submission make sure that you code runs from beginning to end without any error reports.
+  
+  See the class \href{https://caltech.instructure.com/courses/5055}{Intro to Colab} on how to produce a shareable link for your notebook.
+
+\end{itemize}
+  
+\begin{questions} 
+\question[16] 
+Consider a linear model involving variables $\mathbf{x}$ and $\mathbf{y}$, i.e.
+\begin{equation}
+	\mathbf{y} = A\mathbf{x} + \mathbf{\epsilon}
+	\label{eq:linearmodel}
+\end{equation}
+where $\mathbf{\epsilon}$ represents random "noise". We are often interested in estimating $\mathbf{x}$ given $\mathbf{y}$ and $A$. For example, if we are trying to fit a linear model between some variable of interest $\mathbf{y}$ and expression levels of different genes, \eqref{eq:linearmodel} corresponds to the following,
+\begin{equation}
+	\mathbf{y} = X\beta + \mathbf{\epsilon},
+\end{equation}
+where $X$ is the observed gene expression matrix and $\beta$ is a vector of regression coefficients that are to be estimated. In class, you learned about one such estimator called the least square estimator, $\hat{\beta} = X^{\dagger}y = (X^TX)^{-1}X^Ty$.
+
+In the context of scRNA-seq analysis, gene expression matrix $X$ is often rank-deficient, where at least one of the column of $X$ is a linear combination of the other columns.
+In this case, $X^TX$ has no inverse, and so we must use a different estimator instead of $\hat{\beta}$. 
+\begin{parts}
+\part[8] Show that if $X^TX$ is not invertible, then at least one column of $X$ is a linear combination of the others. This implies that there is only one way in which problem with invertibility of $X^TX$ may arise
+\part[8] 	Show that when $X$ is rank-deficient, the least-square problem does not admit a unique solution. 
+\vspace{5pt}\\
+\emph{Comment:} To deal with rank-deficient data matrix $X$, we use the Moore-penrose inverse $X^+$ instead $X^{\dagger}$,
+\begin{equation}
+	X^{+}=\lim _{\delta \rightarrow 0}\left(X^{T} X+\delta^{2} I\right)^{-1} X^{T}.
+	\label{moorepenrose}
+\end{equation}
+
+The Moore-penrose inverse is well-defined even when $X^TX$ is not invertible. Furthermore, it generates a solution $\tilde{\beta} = X^+y$ to the least-square problem (In fact, $\tilde{\beta}$ has the smallest $l_2$ norm among all least-square solutions).  
+
+\end{parts}
+
+
+\newpage
+\question[16] 
+In this question, we will explore the relationship between dependence of random variables and their partial correlation
+\begin{parts} 
+\part[8] Consider the activity of two independently expressed genes as binary random variables $X_1$ and $X_2$, where $P(X_1 = 0) = P(X_2 = 0) = \frac{1}{2}$ and $P(X_1 = 1) = P(X_2 = 1) = \frac{1}{2}$. Furthermore, consider the sum of these two random variables $Y = X_1 + X_2$ as the total number of active genes. Show that the partial correlation between $X$ and $Y$ given $Z$, denoted $\rho_{X_1X_2 \cdot Y}$, is non-zero even though $X_1 \ind X_2$, thus independence does not imply zero partial correlation, where the partial correlation is defined as follows,
+
+\begin{equation*}
+    \rho_{X Y \cdot Z}=\frac{\rho_{X Y}-\rho_{X Z} \rho_{Z Y}}{\sqrt{1-\rho_{X Z}^{2}} \sqrt{1-\rho_{Z Y}^{2}}},
+\end{equation*}
+with $\rho_{X Y}$ being the regular Pearson correlation.
+
+\part[8] Partial correlation is meant to measure the relationship between two random variables after removing any linear dependency with a third random variable. Consider the set of random variables $X, Y$ and $Z$ with strong non-linear dependence,
+\[Y = X^2 + Z.\]
+Show that the partial correlation $\rho_{XY \cdot Z} = 0$ when X and Z are independent, standard Gaussians, even though $X$ and $Y$ are not independent given $Z$. Therefore, zero partial correlation does not imply conditional independence. Note that zero partial correlation does imply conditional independence under the special condition that all variables are jointly normal.
+
+% \part[12]
+% Under normality assumptions, we shall see that partial correlation does give information about the dependency between random variables. Consider three random variables $(X_1, X_2, Y)$ that are jointly normal.
+% \begin{subparts}
+% \subpart[3]	Denote $X = (X_1,X_2)$, Show that $E[X|Y] = \alpha + BY$ for some vector $\alpha$ and matrix $B$
+% \subpart[3] Consider the conditional correlation $\rho_{X_1X_2|Y}$ defined as follows,
+% \begin{equation*}
+% 	\rho_{X_1 X_2 |Y}=\frac{E[(X_1-E[X_1| Y])(X_2-E[X_2|Y]) |Y]}{\sqrt{E\left[(X_1-E[X_1|Y])^{2} | Y\right] E\left[(X_2-E[X_2\mid Y])^{2}|Y\right]}} .
+% \end{equation*}
+% Show that $\rho_{X_1X_2|Y}$ is independent of $Y$.
+% \subpart[6] Using \autoref{parcorthm}, show that if $(X_1, X_2, Y)$ are jointly normal, the partial correlation $\rho_{X_1X_2 \cdot Y} = 0$ if and only if $X_1$ and $X_2$ are conditionally independent given $Y$.
+% \vspace{7pt}
+% \begin{theorem}
+% For any random vectors $X = (X_1,X_2)$ and $Y=(Y_1,Y_2,...,Y_p)$, if there exists a vector $\alpha$ and a matrix $B$ such that
+% \[E[X|Y] = \alpha + BY \text{ and } \rho_{X_1X_2 |Y} \text{ does not depend on Y},\]	
+% then $\rho_{X_1X_2 \cdot Y} =  \rho_{X_1X_2 |Y}$
+% \label{parcorthm}
+% \end{theorem} 
+% \vspace{7pt}
+% Hint: Since $(X_1, X_2, Y)$ are jointly normal, $\rho_{X_1X_2|Y} = 0$ if and only if $X_1$ and $X_2$ are conditionally independent given $Y$. 
+
+% \end{subparts}
+
+\end{parts}
+
+\newpage
+\question[12] 
+A RNAseq analysis pipeline typically starts by removing cells  whose total RNA level is below a threshold value, as these are likely to be artifacts (e.g. empty droplets with spurious RNA detected). We will explore a potential issue with this pre-processing step when the threshold value is not chosen with care. Suppose the expression level of two genes, $X_1$ and $X_2$, can be modeled as follows,
+\begin{equation*}
+    \begin{split}
+        X_1 &= Z + \epsilon_1, \\
+        X_2 &= Z + \epsilon_2,
+    \end{split}
+\end{equation*}
+where $Z$ is a negative binomial random variable with $\mathbb{E}(Z) = n(1-p)/p$ and $\mathrm{Var}(Z)= n(1-p)/p^2$, $\epsilon_1$ and $\epsilon_2$ are independent, identically distributed Poisson random variable with $\mathbb{E}(\epsilon_1) = \mathbb{E}(\epsilon_1) = \lambda$ and are also both independent of $Z$. For this question, set $\lambda = 40$, $n=1$, $p=0.3$.\\
+
+We provide a blank \href{https://github.com/pachterlab/BI-BE-CS-183-2023/blob/main/HW2/Problem3.ipynb}{Problem 3 notebook here}.
+
+\begin{parts}
+    \part[4] Write a script that generates 100,000 pairs of ($X_1$ $X_2$) corresponding to 100,000 cells, and compute the correlation between the set of sample values. 
+    \part[4] Using the same set of sample values, create a filtered set by removing all paired instances where $X_1 + X_2 < 60$. Compute the correlation between the remaining pair of values in the filtered set, and make a scatter plot showing the original and the filtered set of points (use different colors).
+    \part[4] Repeat part (b) using a different condition of $X_1 + X_2 < 80$, report the correlation of the resulting data points and a corresponding scatter plot, how does it compare with your result in part (a) and (b)?
+\end{parts}
+
+\newpage
+\question[28] 
+
+Here you will explore how to use (1) linear regression to model gene count relationships, and investigate the assumptions these models will make. Utilizing the metadata from single-cell datasets, you will also apply (2) partial correlations to remove the influence of possibly confounding variables from your calculations of correlation between genes and their expression profiles. See the \href{https://github.com/pachterlab/BI-BE-CS-183-2023/blob/main/HW2/Problem4.ipynb}{Problem 4 notebook here}. \\
+
+Your edited version of the notebook \textit{must be submitted } for this problem. Reminder to check that your notebook runs all the way through with the the {\tt Runtime} $\xrightarrow{}$ {\tt Restart} and {\tt Runtime} $\xrightarrow{}$ {\tt Run All} commands.\\
+
+
+\question[28] 
+
+Here you will explore how to use a \textit{spatial} RNA-seq dataset to perform (1) logistic regression to extract genes which are cell type markers and (2) spatial (auto)correlation analysis to recover spatially-variant gene relationships, which may or may not map to cell type markers. This will combine using gene-count matrices and gene-coordinate matrices, where 2D coordinates are given for the genes in the tissue. See the \href{https://github.com/pachterlab/BI-BE-CS-183-2023/blob/main/HW2/Problem5.ipynb}{Problem 5 notebook here}. \\
+
+Your edited version of the notebook \textit{must be submitted } for this problem. Reminder to check that your notebook runs all the way through with the the {\tt Runtime} $\xrightarrow{}$ {\tt Restart} and {\tt Runtime} $\xrightarrow{}$ {\tt Run All} commands.\\
+
+
+\end{questions}
+
+
+\end{document}
+
