@@ -1,0 +1,72 @@
+\documentclass[11pt]{exam}
+\usepackage{amsfonts,amsthm,amsmath,amssymb,mathrsfs,bbm,dsfont}
+\usepackage{hyperref}
+\usepackage{csquotes}\MakeOuterQuote{"}
+\qformat{\textbf{Problem \thequestion}\quad (\thepoints)\hfill}
+\newcommand{\ind}{\perp\!\!\!\!\perp} 
+\newtheorem{theorem}{Theorem}
+
+\begin{document}
+
+\begin{center}
+
+     \textbf{Bi/BE/CS 183 2022-2023\\ Instructor: Lior Pachter\\ TAs: Tara Chari, Meichen Fang, Zitong (Jerry) Wang \vskip 0.15in Problem Set 3}
+
+\end{center}
+Submit your solutions as a single PDF file via Canvas by {\bf 8am Tuesday January 31st}. 
+\begin{itemize}
+  \item If writing up problems by hand, please use a pen and not a pencil, as it is difficult to read scanned submission of pencil work. Typed solutions are preferred.
+  \item For problems that require coding, Colab notebooks will be provided. Please copy and save the shared notebook and edit your own copy, which you should then submit by including a clickable link in your submitted homework. Prior to submission make sure that you code runs from beginning to end without any error reports.
+  \end{itemize}
+
+\begin{questions}
+\question[30]  Consider $X$ as a $n \times m$ gene expression matrix, where $n$ is the number of cells and $m$ is the number of genes. Normally we treat the genes as features and cells as observations, and compute the $\text{\emph{principal components}}$ of the collection of $n$ cell vectors (row vectors) by finding the eigenvectors of the covariance matrix of $X$ (where the element at the $i$-th row and $j$-th column is the covariance between gene $i$ and gene $j$). Suppose now you treat cells as features and genes as observations, so you want to find the principal components of the $m$ gene vectors (column vectors) of $X$.
+\begin{parts} 
+\part[6] Give an expression for the covariance matrix $\Sigma$ (up to a constant factor), where $\Sigma_{ij}$ is the covariance between cell $i$ and cell $j$. Note that $X$ may not be mean-centered. 
+\part[10] Outline how you would obtain the principal components of the $m$ gene vectors of $X$
+\part[6] Provide an interpretation for the principal components you would obtain in this case, as well as the measured variance along them, please interpret in terms of cells and their gene expression levels.
+\part[8] In this case, what is the maximum number of principal components that can have non-zero variance (i.e. eigenvectors with non-zero eigenvalues) and why?
+
+\end{parts}
+
+\newpage
+\question[10] 
+% When performing PCA on a data matrix $X$ using functions from  scientific computation libraries, output from two different implementations of PCA may look quite different. We will explore some of the reasons with which this may happen.
+% \begin{parts} 
+% \part[4] Show that any scalar multiple of an eigenvector is still an eigenvector, so that any principal component is unique only up to a linear transformation. 
+% \part[4] Suppose we ask principal components to be normalized to have unit $l_2$ norm, does this ensure uniqueness? 
+% \part 
+% \begin{subparts}
+% \subpart[6] Suppose the matrix $X$ has a set of eigenvectors $\{\mathbf{v}_i\}_{i=1}^n$ with identical eigenvalues $\lambda$, show that any linear combination of this set of eigenvectors is also an eigenvector.
+% 	\subpart[10] 
+ Construct 8 unique data points in $\mathbb{R}^2$, such that the eigenvectors of their $2\times 2$ covariance matrix have equal eigenvalues, provide their coordinates and show that they have the desired property.
+% 	\subpart[6] Suppose we scale all principal components of a data matrix so their last coordinate is $1$, furthermore we know that by definition principal components must be mutually orthogonal, do these conditions altogether ensure their uniqueness? Explain your answer.
+% \end{subparts}
+
+% \end{parts}
+
+\newpage
+\question[10] 
+Finding principal components is equivalent to finding a matrix transformation that decorrelates a set of random variable. For example, given a vector $\mathbf{x} \in \mathbb{R}^m$ where the components are random variables representing the expression level of different genes, the corresponding $n \times m$ gene expression matrix can be viewed as $n$ samples/observations of the random vector $\mathbf{x}$. When performing PCA on the gene expression matrix, we are trying in finding a projection matrix $P$ such that $\mathbf{y} = P\mathbf{x}$ has uncorrelated components, i.e. the covariance matrix $\Sigma_\mathbf{y}$ is diagonal. In doing so, we are making the implicit assumption that all pairwise correlations $\rho(y_i,y_j)$ together captures most of the statistical dependencies in our measurements.
+\begin{parts}
+	\part[5] Explain why PCA may not remove all statistical dependencies, i.e. why components of $\mathbf{y}$ may still be statistically dependent.
+	\part[5] Consider the more stringent form of removing redundancy which is statistical independence.
+	\begin{equation}
+		P(y_i,y_j) = P(y_i)P(y_j),
+		\label{independent}
+	\end{equation}
+ for all $i\neq j$, where $P(\cdot)$ denotes the probability density. The class of algorithm that attempts to satisfy this much more stringent constraint is known as Independent Component Analysis (ICA). Show that PCA actually accomplishes statistical independence (\autoref{independent}) when $\mathbf{x}$ is (multivariate) Gaussian distributed (Hint: uncorrelated, jointly Gaussian random variables are independent).
+	\end{parts}
+	
+%\question[2] Given $n$ points in $\mathbb{R}^p$, finding the first $k$ principal components consists of finding a set of vectors such that the affine space of dimension $k < p$ spanned by these vectors has the property that the squared distance of the points to their orthogonal projection onto the space is minimized. We will denote this $k$-dimensional subspace as the PCA subspace of dimension $k$. Show that the PCA subspace of dimension $k$ contains all PCA subspaces of small dimensions. (Hint: PCA can be performed by an iterative algorithm, first selecting a normalized direction in $p$-dimensional space along which the variance in $X$ is maximized, this is the first principal component, then find another direction along which variance is maximized but restrict the search to directions orthogonal to all previously selected directions)
+
+\newpage
+\question[50] In this problem you will compare the results of PCA and SVD, common procedures for dimensionality reduction of a single-cell dataset. Using the eigenvectors (components) of these factorization procedures we will see how relevant "directions" in biological data can be extracted, such as components which distinguish the various cell types in the data.\\
+
+The link to the Problem 4 notebook is \href{https://github.com/pachterlab/BI-BE-CS-183-2023/blob/main/HW3/Problem4.ipynb}{here}. Your edited version of the notebook \textit{must be submitted } for this problem. Reminder to check that your notebook runs all the way through with the the {\tt Runtime} $\xrightarrow{}$ {\tt Restart} and {\tt Runtime} $\xrightarrow{}$ {\tt Run All} commands.
+
+
+\end{questions}
+
+
+\end{document}
