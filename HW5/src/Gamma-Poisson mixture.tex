@@ -1,0 +1,45 @@
+\documentclass[11pt]{exam}
+\usepackage{amsfonts,amsthm,amsmath,amssymb,mathrsfs,bbm,dsfont}
+\usepackage{hyperref}
+\usepackage{nicematrix}
+\usepackage{csquotes}\MakeOuterQuote{"}
+\qformat{\textbf{Problem \thequestion}\hfill}
+\newcommand{\ind}{\perp\!\!\!\!\perp} 
+\newtheorem{theorem}{Theorem}
+
+\begin{document}
+
+  
+  
+\section{Negative binomial as Gamma-Poisson mixture} 
+The Poisson distribution is commonly used to model count data, but it lacks flexibility as a model because its variance is always equal to its mean. One way to get around this problem is to considered a hierarchical model, specifically a Poisson model with Gamma-distributed mean
+\begin{equation}
+	\begin{split}
+		X|\lambda &\sim \operatorname{Pois}(\lambda) \\
+		\lambda &\sim \operatorname{Gamma}\left(\alpha, \beta \right).
+	\end{split}
+\end{equation}
+Note $\lambda$ is now a random variable. The probability density function of the Gamma distribution using shape $\alpha$ and rate $\beta$ is as follows,
+\begin{equation}
+	f(\lambda; \alpha, \beta)=\frac{\beta^{\alpha}}{\Gamma(\alpha)} \lambda^{\alpha-1} e^{-\beta \lambda}, \hspace{10pt} \Gamma(\alpha) = \int_{0}^{\infty} x^{\alpha-1} e^{-x} dx, \hspace{10pt} \mathrm{for} \hspace{5pt} \lambda >0
+\end{equation}
+with parameters $\alpha>0$, $\beta>0$. We shall see that $X$ has the useful property that its mean is partially decoupled from its variance, meaning that we can tune the parameters of this hierarchical model, namely $\alpha$ and $\beta$, such that  $E(X)$ and $\mathrm{Var}(X)$ can take on different values.
+
+\begin{align*}
+    P(X=x)&=\int_0^{\infty} f(\lambda; \alpha, \beta) \frac{\lambda^x e^{-\lambda}}{x!}d\lambda\\
+     &=\int_0^{\infty} \frac{\beta^{\alpha}}{\Gamma(\alpha)} \lambda^{\alpha-1} e^{-\beta \lambda} \frac{\lambda^x e^{-\lambda}}{x!}d\lambda \\
+    &=\frac{\beta^{\alpha}}{\Gamma(\alpha)x!} \int_0^{\infty} \lambda^{x+\alpha-1} e^{-(\beta+1) \lambda} d\lambda\\
+    &=\frac{\beta^{\alpha}}{\Gamma(\alpha)x!} (\frac{1}{\beta+1})^{x+\alpha}\int_0^{\infty} (\beta+1)\lambda)^{x+\alpha-1} e^{-(\beta+1) \lambda} d(\beta+1)\lambda\\
+    &=\frac{\beta^{\alpha}}{\Gamma(\alpha)x!} (\frac{1}{\beta+1})^{x+\alpha}\Gamma(\alpha+x)\\
+    &=\frac{\Gamma(\alpha+x)}{\Gamma(\alpha)x!} \frac{\beta^{\alpha}}{(\beta+1)^{x+\alpha}}\\
+    &= \frac{\Gamma(\alpha+x)}{\Gamma(\alpha)x!} (\frac{1}{\beta+1})^{x} (\frac{\beta}{\beta+1})^{\alpha}\\
+    &= NB(x,\alpha,\frac{1}{\beta+1})
+\end{align*}
+which is precisely the probability mass function of a negative binomial random variable.
+
+ Since $X \sim NB(x,\alpha,\frac{1}{\beta+1})$, it can be shown that $E(X) = \frac{\alpha}{\beta}=E(\lambda)$
+and $\mathrm{Var}(X) = \frac{\alpha}{\beta} + \frac{\alpha}{\beta^2} $. Keep the mean $\frac{\alpha}{\beta}$ fixed, as $\beta \rightarrow \infty$, $\mathrm{Var}(X) \rightarrow E(X)$. 
+
+
+
+\end{document}

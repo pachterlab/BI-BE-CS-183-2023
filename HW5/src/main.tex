@@ -1,0 +1,90 @@
+\documentclass[11pt]{exam}
+\usepackage{amsfonts,amsthm,amsmath,amssymb,mathrsfs,bbm,dsfont}
+\usepackage{hyperref}
+\usepackage{nicematrix}
+\usepackage{csquotes}\MakeOuterQuote{"}
+\qformat{\textbf{Problem \thequestion}\quad (\thepoints)\hfill}
+\newcommand{\ind}{\perp\!\!\!\!\perp} 
+\newtheorem{theorem}{Theorem}
+
+\usepackage[backend=biber,style=nature]{biblatex}
+%\bibliographystyle{unsrt}
+\addbibresource{refs.bib}
+
+
+\begin{document}
+
+\begin{center}
+
+     \textbf{Bi/BE/CS 183 2022-2023\\ Instructor: Lior Pachter\\ TAs: Tara Chari, Meichen Fang, Zitong (Jerry) Wang \vskip 0.15in Problem Set 5 - Midterm}
+
+\end{center}
+\textbf{You are not allowed to collaborate with others for this Midterm, though you may ask clarification questions on Piazza or at Office Hours. This Midterm is open note, which includes Lecture slides and your personal notes.} \\
+
+Submit your solutions as a single PDF file via Canvas by {\bf 8am Tuesday February 14th}. 
+\begin{itemize}
+  \item If writing up problems by hand, please use a pen and not a pencil, as it is difficult to read scanned submission of pencil work. Typed solutions are preferred.
+  \item For problems that require coding, Colab notebooks will be provided. Please copy and save the shared notebook and edit your own copy, which you should then submit by including a clickable link in your submitted homework. Prior to submission make sure that you code runs from beginning to end without any error reports.
+  \end{itemize}
+  
+  
+  
+  \begin{questions}
+  \question[10] Given a Poisson random variable $X$, with probability mass function $P(X=x) = e^{-\lambda}\lambda^x/x!$, show that $E(X) = \lambda$. (Hint: $e^x = \sum_{n=0}^{\infty} x^n/n!$)
+\question[16] Suppose $x = (x_1,x_2,\ldots,x_n)$ are i.i.d. observations from a Poisson random variable with unknown parameter $\lambda$.
+\begin{parts} 
+\part[8] Write down the log-likelihood function $L(\lambda \mid x)$ for this set of observations.
+\part[8] Find the maximum-likelihood estimator of $\lambda$ by taking the appropriate derivative of $L(\lambda \mid x)$. (Hint: the estimator you obtain should be a function of the set of observations $x$)
+\end{parts}
+
+\question[24] Consider two independent geometric random variables, $X$ and $Y$, with identical probability mass function $P(X=k) = (1-p)^{k-1}p$, where $k = 1,2,3,\ldots$ and $p$ is a parameter of the distribution. 
+\begin{parts} 
+\part[8] Show that $P(X+Y = k) = (k-1)(1-p)^{k-2}p^2$ for $k=2,3,\ldots$
+\part[8] We say that $Z$ has a negative binomial distribution with parameters $r,p$ if, 
+\[P(Z=z) = \binom{z-1}{r-1} p^r(1-p)^{z-r}, z = r, r+1, \ldots.\]
+Show that $X+Y$ has a negative binomial distribution with parameters $r=2$ and $p$ (note that this parametrization of the negative binomial distribution is different from the one given in problem 5). 
+\part[8] see \href{https://github.com/pachterlab/BI-BE-CS-183-2023/blob/main/HW5/Problem3c.ipynb}{Colab notebook here}
+\end{parts}
+  
+  \question[10] Construct the suffix tree for the word "Yellowwooddoor".
+  
+ \question[40] For this problem you will be exploring various models which can be used to describe count data i.e. the gene-count matrices we use in single-cell genomics. \href{https://github.com/pachterlab/BI-BE-CS-183-2023/blob/main/HW5/Problem5.ipynb}{The Problem 5 notebook is here}.
+
+    Single-cell gene counts, which describe stochastically sampled, discrete measurements of UMI counts, are often modeled as being generated from a negative binomial (or Gamma-Poisson) distribution. However, there is a common assumption that droplet-based methods for single-cell RNA seq incur an overabundance of zeros (more zero counts) than would be predicted by random sampling. Thus it is also common to see single-cell data modeled with zero-inflated negative binomials (the ZINB distribution, with an extra parameter for the probability of zero counts). Here you will analyze these zero-inflation assumptions, following work done in \cite{Svensson2020-vw}. \\
+
+    Your edited version of the notebook \textit{must be submitted } for this problem. Reminder to check that your notebook runs all the way through with the the {\tt Runtime} $\xrightarrow{}$ {\tt Restart} and {\tt Runtime} $\xrightarrow{}$ {\tt Run All} commands.
+  
+  
+% \question[30] The Poisson distribution is commonly used to model count data, but it lacks flexibility as a model because its variance is always equal to its mean. One way to get around this problem is to considered a hierarchical model, specifically a Poisson model with Gamma-distributed mean
+% \begin{equation}
+% 	\begin{split}
+% 		X|\lambda &\sim \operatorname{Pois}(\lambda) \\
+% 		\lambda &\sim \operatorname{Gamma}\left(\alpha, \beta \right).
+% 	\end{split}
+% \end{equation}
+% Note $\lambda$ is now a random variable. The probability density function of the Gamma distribution is as follows,
+% \begin{equation}
+% 	f(\lambda; \alpha, \beta)=\frac{\beta^{\alpha}}{\Gamma(\alpha)} \lambda^{\alpha-1} e^{-\beta \lambda}, \hspace{10pt} \Gamma(\alpha) = \int_{0}^{\infty} x^{\alpha-1} e^{-x} dx, \hspace{10pt} \mathrm{for} \hspace{5pt} \lambda >0
+% \end{equation}
+% with parameters $\alpha>0$, $\beta>0$. We shall see that $X$ has the useful property that its mean is partially decoupled from its variance, meaning that we can tune the parameters of this hierarchical model, namely $\alpha$ and $\beta$, such that  $E(X)$ and $\mathrm{Var}(X)$ can take on different values.
+% \begin{parts} 
+% \part[5] First, let's work with a different parametrization of the Gamma distribution. Show that $\operatorname{Gamma}(\alpha,\beta)$ where $\alpha>0$, $\beta>0$ is equivalent to $\operatorname{Gamma}(r,\frac{p}{r})$ where $r>0$, $p > 0$.
+% %(Hint: $\alpha \Gamma(\alpha) = \Gamma( \alpha + 1)$)
+% \part[15] Using the alternative parametrization from part (a), show that the probability mass function of $X$ can be written as follows,
+% \begin{equation}
+% 	P(X=x) = \frac{\Gamma(r+x)}{x ! \Gamma(r)} \left(\frac{p}{p+r}\right)^{x}\left(\frac{r}{p+r}\right)^{r},
+% \end{equation}
+% which is precisely the probability mass function of a negative binomial random variable, i.e. $X \sim NB\left(r,\frac{p}{p+r}\right)$.
+
+% \part[5] Since $X \sim NB\left(r,\frac{p}{p+r}\right)$, it can be shown that $E(X) = p$
+% and $\mathrm{Var}(X) = p + \frac{p^2}{r}$. Using these facts, describe all possible values that $E(X)$ and $\mathrm{Var}(X)$ can take on, given that $r,p>0$.
+
+% \part[5] Show that as $r \rightarrow \infty$, $\mathrm{Var}(X) \rightarrow E(X)$. In fact, in the limit of large $r$, the NB distribution and the Poisson distribution are equivalent (don't need to prove this last part).
+
+% \end{parts}
+
+  \end{questions}
+
+
+\printbibliography
+\end{document}
