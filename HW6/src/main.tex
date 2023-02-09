@@ -1,0 +1,86 @@
+\documentclass[11pt]{exam}
+\usepackage{amsfonts,amsthm,amsmath,amssymb,mathrsfs,bbm,dsfont}
+\usepackage{hyperref}
+\usepackage{nicematrix}
+\usepackage{csquotes}\MakeOuterQuote{"}
+\qformat{\textbf{Problem \thequestion}\quad (\thepoints)\hfill}
+\newcommand{\ind}{\perp\!\!\!\!\perp} 
+\newtheorem{theorem}{Theorem}
+
+\usepackage[backend=biber,style=nature]{biblatex}
+%\bibliographystyle{unsrt}
+\addbibresource{refs.bib}
+
+
+\begin{document}
+
+\begin{center}
+
+     \textbf{Bi/BE/CS 183 2022-2023\\ Instructor: Lior Pachter\\ TAs: Tara Chari, Meichen Fang, Zitong (Jerry) Wang \vskip 0.15in Problem Set 6}
+
+\end{center}
+Submit your solutions as a single PDF file via Canvas by {\bf 8am Tuesday February 21st}. 
+\begin{itemize}
+  \item If writing up problems by hand, please use a pen and not a pencil, as it is difficult to read scanned submission of pencil work. Typed solutions are preferred.
+  \item For problems that require coding, Colab notebooks will be provided. Please copy and save the shared notebook and edit your own copy, which you should then submit by including a clickable link in your submitted homework. Prior to submission make sure that you code runs from beginning to end without any error reports.
+  \end{itemize}
+  
+  
+  
+  \begin{questions}
+  \question[20] The delta method for finding variance-stabilizing transformations makes use of the following relation,
+\[\mathrm{Var}[f(X)] \approx (f'(\mu))^2 \mathrm{Var}[X], \]
+where $\mu = E[X]$. We will derive this approximate relation using Taylor expansion. 
+\begin{parts} 
+\part[10] Under certain regularity conditions, a function $f(x)$ can be expressed as an infinite sum consisting of powers of $x$ known as a Taylor series,
+\[f(x) = \sum_{n=0}^{\infty}\frac{f^{(n)}(a)}{n!}(x-a)^n,\]
+where $f^{(n)}(a)$ denotes the $n$-th derivative of $f$ evaluated at the point $a$.
+Write down the first-order Taylor expansion of $f(X)$ around the point $X = \mu = E[X]$.
+\part[10] Using your Taylor expansion, show that $\mathrm{Var}[f(X)] \approx (f'(\mu))^2 \mathrm{Var}[X]$, where $\mu = E[X]$.
+\end{parts}
+
+\newpage
+\question[40] When performing single-cell RNAseq, there is usually variability in read-depth (total number of reads) between cells, which could be due to both variable gene expression and variable efficiency with which molecules are sampled from the mRNA pool of a cell during the measurement process. One way to adjust for these variabilities (assuming they are not of interest to you) is to divide each gene count by the total count for each cell, which we will refer to as the size factor $s$, so we will have a different size factor for each cell. In this problem. you will explore an issue associated with this simple adjustment when combined with variance-stabilizing by the delta method, and \textbf{practice applying the law of total variance} as discussed in \href{https://docs.google.com/presentation/d/1ZJQQSgKdQA7PUw2HyZmgJwRN1IgRXA0e1XTmL9D3iF8/edit#slide=id.g10d12d755e5_0_229}{Lecture 4}.
+
+\begin{parts} 
+\part[10] Consider a simple model of gene count represented by a Gamma-Poisson random variable $K$, equivalently known as a negative-binomial random variable,  with parameters $k$ and $\theta$:
+\begin{equation}
+	\begin{aligned}
+		K \mid Q = q & \sim \operatorname{Poisson}(q) \\
+		Q & \sim \operatorname{Gamma}(k, \theta).
+\end{aligned}
+\end{equation}
+The Poisson level of this hierarchical model corresponds to sampling noise and the Gamma level models additional variation between genes. Using the fact that $E[Q] = k\theta$ and $\mathrm{Var}[Q] = k\theta^2$, show that $E[K] = k\theta$, and $\mathrm{Var}[K] = k\theta + k \theta^2$.
+
+\part[10] Now, consider a model with size factors $s$,
+\begin{equation}
+	\begin{aligned}
+		K' \mid Q,s & \sim \operatorname{Poisson}(sQ) \\
+		Q & \sim \operatorname{Gamma}(\frac{1}{\phi}, \mu\phi).
+\end{aligned}
+\end{equation}
+Note that Q has mean $\mu$ and variance $\phi\mu^2$. Find an expression for the mean and variance of $K'$ in terms of the parameters $\mu' = s\mu$ and $\phi$, show your work.
+
+\part[10] Finally, suppose we were to normalize our gene count by the size factor as mentioned earlier,
+\[ Y = K'/s\]
+Find an expression for the mean and variance of $Y$ in terms of the parameters $s$, $\mu$, and $\phi$, show your work
+
+\part[10] What is the problem with performing variance stabilization on $Y$ using a transformation for Gamma-Poisson (negative-binomial) random variable derived by the Delta method? Especially if the size factor $s$ varies a lot between cells. Recall that the mean-variance relationship of a Gamma-Poisson random variable is $\sigma^2 = \mu + \phi \mu^2$.
+
+\end{parts}
+
+\newpage
+\question[40] For this problem you will be exploring various methods for variance stabilization commonly used to transform single-cell datasets. \href{https://github.com/pachterlab/BI-BE-CS-183-2023/blob/main/HW6/Problem3.ipynb}{The Problem  notebook is here}.
+
+   Often single-cell count matrices are variance stabilized e.g. using the log1p transformation. This theoretically decouples the variance from the mean expression (per cell) to allow for differential expression testing (particularly as common regression models and statistical tests assume homoscedascity) and comparing cells to determine cell types/populations within the larger group, using clustering algorithms \cite{Svensson2017-av}. \\
+
+    Your edited version of the notebook \textit{must be submitted } for this problem. Reminder to check that your notebook runs all the way through with the the {\tt Runtime} $\xrightarrow{}$ {\tt Restart} and {\tt Runtime} $\xrightarrow{}$ {\tt Run All} commands.
+  
+  
+
+
+  \end{questions}
+
+
+\printbibliography
+\end{document}
