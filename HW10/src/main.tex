@@ -1,0 +1,62 @@
+\documentclass[11pt]{exam}
+\usepackage{amsfonts,amsthm,amsmath,amssymb,mathrsfs,bbm,dsfont,bm,hyperref}
+\usepackage{csquotes}\MakeOuterQuote{"}
+\usepackage{hyperref}
+\setlength{\paperheight}{12in}
+\setlength\parindent{0pt}
+\usepackage{xcolor}
+\parskip=5pt 
+\usepackage{scrextend}
+\usepackage{graphicx}
+\usepackage{anyfontsize}
+\usepackage[shortlabels]{enumitem}
+
+
+\qformat{\textbf{Problem \thequestion}\quad (\thepoints)\hfill}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!50!red,
+  urlcolor=blue!70!black
+}
+
+
+\begin{document}
+
+
+\begin{center}
+
+     \textbf{Bi/BE/CS 183 2022-2023\\ Instructor: Lior Pachter\\ TAs: Tara Chari, Meichen Fang, Zitong (Jerry) Wang \vskip 0.15in Problem Set 10 - Final}
+
+\end{center}
+
+
+ \vskip 0.15in
+
+\textbf{You are not allowed to collaborate with others for this Final, though you may ask clarification questions on Piazza or at Office Hours. This Final is open note, which includes Lecture slides, your personal notes, and any resources provided in the notebook.} \\
+
+Submit your solutions as a single PDF file via Canvas by {\bf 11:59pm Friday March 17th}. 
+\begin{itemize}
+  \item If writing up problems by hand, please use a pen and not a pencil, as it is difficult to read scanned submission of pencil work. Typed solutions are preferred.
+  \item For problems that require coding, Colab notebooks will be provided. Please copy and save the shared notebook and edit your own copy, which you should then submit by including a clickable link in your submitted homework. Prior to submission make sure that you code runs from beginning to end without any error reports.
+  \end{itemize}
+
+\begin{questions}
+\question[100]
+
+In this problem you will process a single-cell dataset from the raw fastqs (sequencing reads of the cDNA library) to produce the cell x gene count matrix we usually work with. 
+
+Given this count matrix you will additionally investigate the impact of various normalization techniques and dimensionality reduction on clustering of the cells (i.e. looking for cell types). With the metadata for this dataset, the cell types and ages of the mice used, you will then compare the efficacy of logistic regression versus neural network based techniques for classifying the age of the mouse a cell came from. Together this will take you through common tasks performed on single-cell datasets and the effects of common data processing choices. \\
+
+The \href{https://github.com/pachterlab/BI-BE-CS-183-2023/blob/main/HW10/HW10Final.ipynb}{Colab notebook is here}. \\
+
+Your edited version of the notebook \textit{must be submitted } for this problem. Reminder to check that your notebook runs all the way through with the the {\tt Runtime} $\xrightarrow{}$ {\tt Restart} and {\tt Runtime} $\xrightarrow{}$ {\tt Run All} commands.
+
+
+\end{questions}
+% \begin{thebibliography}{1}
+% \bibitem{Trapnell2015}
+% Trapnell, C., 2015. Defining cell types and states with single-cell genomics. {\it Genome research}, 25(10), pp.1491-1498.
+% \end{thebibliography}
+\end{document}
+
