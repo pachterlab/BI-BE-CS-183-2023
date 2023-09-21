@@ -16,7 +16,7 @@ This repository contains lecture notes, problem sets, and associated Google Cola
 - [Lecture 12](https://docs.google.com/presentation/d/1qTSqWCfXNwKxpMT5VcgCrv_gmZ9xlXazukaWjWYoJ3o/edit?usp=drive_link): Variance stablization
 - [Lecutre 13](https://docs.google.com/presentation/d/1ExkNVQ8u8IuZ1ZmUpTyd7oBuRkqU5RZEHm1q4eqK9Uc/edit?usp=drive_link): Differential analysis
 - [Lecture 14](https://docs.google.com/presentation/d/1F-OFNeVNClOYxTnJGW-pZ0KHzTIggPZeyZsk7y9gM0g/edit?usp=drive_link): Multiple testing
-- [Lecture 15](https://docs.google.com/presentation/d/1F-OFNeVNClOYxTnJGW-pZ0KHzTIggPZeyZsk7y9gM0g/edit?usp=drive_link): Hidden Markov models
+- [Lecture 15](https://docs.google.com/presentation/d/1zpWVNvlbnqAjDlFr4XGaocOPw0Y-s6qm16kf01GS2aM/edit?usp=drive_link): Hidden Markov models
 - [Lecture 16](https://docs.google.com/presentation/d/1ry13HMq3z-DERtXNnm5L_YHXQFtIltmoGDTq3zydn6k/edit?usp=drive_link): Dynamic programming
 - [Lecture 17](https://docs.google.com/presentation/d/1Nf528xSOGWQS6sEkkAdA1MSt4p7u3aHnttA-tXGlzP0/edit?usp=drive_link): Mechanism
 - [Lecture 18](https://docs.google.com/presentation/d/15lw0UxeSoVwxrmn8L5BYu_xr7ccMB2u3QvGcn7M0sa8/edit?usp=drive_link): The Chemical Master Equation
