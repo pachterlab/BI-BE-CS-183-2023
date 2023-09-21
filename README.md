@@ -3,7 +3,7 @@ This repository contains lecture notes, problem sets, and associated Google Cola
 
 ### Lectures slides
 - [Lecture 1](https://docs.google.com/presentation/d/1-Bo7yaaaxbf8ul_2gacZIII_pggd6JmSVXEF4Zwqekg/edit?usp=sharing): Introduction to computational biology of single-cell RNA-seq
-- [Lecture 2](https://docs.google.com/presentation/d/1tpeNHSONBunT7TwZSlwm42VknPVNeufdY7A4rzqMhkI/edit?usp=drive_link): Single-cell RNA-seq technologies
+- [Lecture 2](https://docs.google.com/presentation/d/1tpeNHSONBunT7TwZSlwm42VknPVNeufdY7A4rzqMhkI/edit?usp=drive_link): Single-cell RNA-seq technology
 - [Lecture 3](https://docs.google.com/presentation/d/1P2tFP82zIwZHOlRQWu8qlFUjCck3BDhtTPquZssciio/edit?usp=drive_link): Linear and logistic regression
 - [Lecture 4](https://docs.google.com/presentation/d/1ZJQQSgKdQA7PUw2HyZmgJwRN1IgRXA0e1XTmL9D3iF8/edit?usp=drive_link): Correlation and causation
 - [Lecture 5](https://docs.google.com/presentation/d/1A0g8BbgGmQllI5y1kdEYOPRQ0Q9CPMDMmX-RQwbhRzM/edit?usp=drive_link): Singular value decomposition
