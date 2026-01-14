@@ -14,7 +14,7 @@ This repository contains lecture notes, problem sets, and associated Google Cola
 - [Lecture 10](https://docs.google.com/presentation/d/1XjHXsOVMdO0DgP8NvNCHC82DyudHrtf2YXOzRoPBN5g/edit?usp=drive_link): Modeling counts
 - [Lecture 11](https://docs.google.com/presentation/d/1Snj90kIe6iguVfftZ18404C4h8WcHoEdA8isfy021GQ/edit?usp=drive_link): Generalized linear models
 - [Lecture 12](https://docs.google.com/presentation/d/1qTSqWCfXNwKxpMT5VcgCrv_gmZ9xlXazukaWjWYoJ3o/edit?usp=drive_link): Variance stablization
-- [Lecutre 13](https://docs.google.com/presentation/d/1ExkNVQ8u8IuZ1ZmUpTyd7oBuRkqU5RZEHm1q4eqK9Uc/edit?usp=drive_link): Differential analysis
+- [Lecture 13](https://docs.google.com/presentation/d/1ExkNVQ8u8IuZ1ZmUpTyd7oBuRkqU5RZEHm1q4eqK9Uc/edit?usp=drive_link): Differential analysis
 - [Lecture 14](https://docs.google.com/presentation/d/1F-OFNeVNClOYxTnJGW-pZ0KHzTIggPZeyZsk7y9gM0g/edit?usp=drive_link): Multiple testing
 - [Lecture 15](https://docs.google.com/presentation/d/1zpWVNvlbnqAjDlFr4XGaocOPw0Y-s6qm16kf01GS2aM/edit?usp=drive_link): Hidden Markov models
 - [Lecture 16](https://docs.google.com/presentation/d/1ry13HMq3z-DERtXNnm5L_YHXQFtIltmoGDTq3zydn6k/edit?usp=drive_link): Dynamic programming
